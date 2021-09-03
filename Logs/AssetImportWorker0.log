@@ -122,3 +122,4 @@ Received Import Request.
 Start importing Assets/Shaders/Cel Shader/Includes/Lighting.hlsl using Guid(c374bea1f689621408bb4c51bd3f04e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b52f226be6386f7ec80074971280ccd1') in 0.007891 seconds
   Import took 0.012450 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
