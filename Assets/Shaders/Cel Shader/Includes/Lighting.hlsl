@@ -14,13 +14,14 @@
 //    along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 
-void MainLight_float(float3 WorldPos, out float3 Direction, out float3 Color, out float Attenuation) {
+void MainLight_half(float3 WorldPos, out float3 Direction, out float3 Color, out float DistanceAtten, out float ShadowAtten) {
 #ifdef SHADERGRAPH_PREVIEW
     Direction = half3(0.5, 0.5, -0.25);
     Color = 1;
-    Attenuation = 1;
+    DistanceAtten = 1;
+    ShadowAtten = 1;
 #else
-#ifdef SHADOWS_SCREEN
+#if SHADOWS_SCREEN
     half4 clipPos = TransformWorldToHClip(WorldPos);
     half4 shadowCoord = ComputeScreenPos(clipPos);
 #else
@@ -29,7 +30,9 @@ void MainLight_float(float3 WorldPos, out float3 Direction, out float3 Color, ou
     Light mainLight = GetMainLight(shadowCoord);
     Direction = mainLight.direction;
     Color = mainLight.color;
-    Attenuation = mainLight.distanceAttenuation * mainLight.shadowAttenuation;
+    DistanceAtten = mainLight.distanceAttenuation;
+    ShadowAtten = mainLight.shadowAttenuation;
+
 #endif
 }
 
